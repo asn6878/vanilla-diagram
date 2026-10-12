@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vanilla Infographics — examples</title>
+  <link rel="icon" href="../docs/brand/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/starter/diagram.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 40px 28px; background: var(--vd-soft); color: var(--vd-text); font-family: var(--vd-sans); }
+    main { max-width: 1320px; margin: 0 auto; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    h1 { display: flex; align-items: center; gap: 10px; font-size: 20px; margin: 0 0 8px; letter-spacing: -.6px; }
+    h1 img { width: 32px; height: 32px; }
+    header p { margin: 0; font-size: 14px; color: var(--vd-muted); }
+    #theme { border: 1px solid var(--vd-grid); border-radius: 8px; background: var(--vd-bg); color: var(--vd-text); padding: 9px 12px; cursor: pointer; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .record-label { display: none; font-size: 12px; font-weight: 600; margin: 0 0 14px; min-height: 18px; color: var(--vd-muted); }
+    body.recording { padding: 22px; }
+    body.recording header { display: none; }
+    body.recording .grid { display: block; }
+    body.recording .record-label { display: block; }
+    .cursor { position: fixed; z-index: 20; top: 0; left: 0; width: 12px; height: 12px; border: 2px solid var(--vd-bg); border-radius: 50%; background: var(--vd-strong); pointer-events: none; transform: translate(-50%, -50%); display: none; }
+    .cursor.down { width: 22px; height: 22px; opacity: .65; }
+    @media(max-width: 940px) { .grid { grid-template-columns: 1fr; } }
+    @media(max-width: 540px) { body { padding: 24px 16px; } header { align-items: flex-start; } header p { max-width: 240px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header><div><h1><img src="../docs/brand/logo.svg" alt="">Vanilla Infographics</h1><p>Editable infographics. Play, pause, and inspect any moment.</p></div><button id="theme">Dark theme</button></header>
+    <p class="record-label" id="record-label">Vanilla Infographics</p>
+    <div class="grid"><div id="parcel"></div><div id="growth"></div></div>
+  </main>
+  <div class="cursor" id="cursor"></div>
+  <script type="module">
+    import { mount } from '../assets/starter/diagram.js';
+    import parcel from './scenes/parcel-route.js';
+    import growth from './scenes/growth-curves.js';
+    const params = new URLSearchParams(location.search);
+    const selected = params.get('scene');
+    const recording = params.has('record');
+    if (recording) document.body.classList.add('recording');
+    if (params.get('theme')) document.documentElement.dataset.theme = params.get('theme');
+    const players = {};
+    for (const [name, scene] of Object.entries({ parcel, growth })) {
+      const host = document.getElementById(name);
+      if (selected && selected !== name) { host.remove(); continue; }
+      players[name] = mount(host, { ...scene, autoplay: !recording });
+    }
+    // The recorder uses this handle to reset the start; all recorded controls use real pointer input.
+    window.demoPlayers = players;
+    const button = document.getElementById('theme');
+    button.addEventListener('click', () => {
+      const dark = document.documentElement.dataset.theme !== 'dark';
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      button.textContent = dark ? 'Light theme' : 'Dark theme';
+    });
+    if (params.get('record') === 'controls') {
+      const cursor = document.getElementById('cursor');
+      document.addEventListener('pointermove', event => {
+        cursor.style.display = 'block'; cursor.style.left = `${event.clientX}px`; cursor.style.top = `${event.clientY}px`;
+      });
+      document.addEventListener('pointerdown', () => cursor.classList.add('down'));
+      document.addEventListener('pointerup', () => cursor.classList.remove('down'));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Vanilla Infographics"
+  short_description: "Animated infographics with plain JavaScript and Canvas"
+  default_prompt: "Use $vanilla-diagram to turn my explanation into a clear animated infographic with playback controls."
+  icon_small: "./assets/brand/logo.png"
+  icon_large: "./assets/brand/logo.svg"

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-labelledby="brand-title brand-description">
+  <title id="brand-title">Vanilla Infographics — VI mark</title>
+  <desc id="brand-description">A wooden V and a wooden mallet shaped as I. Transparent background; editable vector paths.</desc>
+  <g id="tool-mark" transform="translate(600 600) scale(2.34375)"><g transform="translate(-24 0)" stroke="#493427" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M-188-143L-124-159-45 113-58 171-105 156Z" fill="#E7BC83"/>
+      <path d="M-58 171L-23 159 65-134 4-152-77 129Z" fill="#C98F55"/>
+      <path d="M-188-143L-176-153-122-170-124-159Z" fill="#F2D4A9" stroke-width="3"/>
+      <path d="M4-152L15-160 72-141 65-134Z" fill="#E1AD75" stroke-width="3"/>
+      <path d="M-159-124C-147-60-121 11-111 57M23-120C13-77-3-34-8 3" stroke="#AA7443" stroke-width="2.3" fill="none"/>
+      <circle cx="-141" cy="-118" r="5.5" fill="#6C7776" stroke="#3C494B" stroke-width="2.2"/>
+      <circle cx="25" cy="-114" r="5.5" fill="#6C7776" stroke="#3C494B" stroke-width="2.2"/>
+      <circle cx="-60" cy="132" r="5.5" fill="#6C7776" stroke="#3C494B" stroke-width="2.2"/>
+      <path d="M123-87H171L179 153Q179 171 161 175H137Q119 170 119 153Z" fill="#EFCC99"/>
+      <path d="M107-139L124-157H211L225-142 208-125 193-139Z" fill="#F0C997" stroke-width="3"/>
+      <path d="M208-125L225-142V-71L208-54Z" fill="#B87942" stroke-width="3"/>
+      <path d="M107-139H194L208-125V-54L194-40H107L93-54V-125Z" fill="#DEA76A"/>
+      <path d="M108-125H193M138-13C136 34 143 68 138 124" fill="none" stroke="#BD844C" stroke-width="2.3"/>
+    </g></g>
+</svg>

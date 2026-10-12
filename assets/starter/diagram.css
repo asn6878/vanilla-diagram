@@ -1,0 +1,177 @@
+/* Vanilla Diagram — scoped player styles and reusable palette. */
+:root {
+  color-scheme: light;
+  --vd-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --vd-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --vd-soft: #f7f8fa;
+  --vd-bg: #ffffff;
+  --vd-text: #2b2f36;
+  --vd-strong: #14181f;
+  --vd-muted: #6b7280;
+  --vd-grid: #e8eaed;
+  --vd-blue: #2f6ff0;
+  --vd-blue-1: #97b7f8;
+  --vd-blue-2: #e2ebfd;
+  --vd-cyan: #008fa8;
+  --vd-cyan-1: #80c7d4;
+  --vd-cyan-2: #dbeff3;
+  --vd-indigo: #6264d9;
+  --vd-indigo-1: #b1b2ec;
+  --vd-indigo-2: #e9e9fa;
+  --vd-violet: #9057d5;
+  --vd-violet-1: #c8abea;
+  --vd-violet-2: #efe7f9;
+  --vd-pink: #ca4f91;
+  --vd-pink-1: #e5a7c8;
+  --vd-pink-2: #f8e6f0;
+  --vd-red: #e3503e;
+  --vd-red-1: #f1a89f;
+  --vd-red-2: #fbe7e4;
+  --vd-orange: #c76a18;
+  --vd-orange-1: #e3b58c;
+  --vd-orange-2: #f7eadf;
+  --vd-amber: #a88400;
+  --vd-amber-1: #d4c280;
+  --vd-amber-2: #f3eedb;
+  --vd-green: #12a37f;
+  --vd-green-1: #89d1bf;
+  --vd-green-2: #def2ed;
+  --vd-slate: #64748b;
+  --vd-slate-1: #b2bac5;
+  --vd-slate-2: #e9ecef;
+  --vd-wash: .14;
+  --vd-line: #8a92a0;
+  --vd-code-kw: #aa0d91;
+  --vd-code-str: #c41a16;
+  --vd-code-num: #1c00cf;
+  --vd-code-fn: #1c00cf;
+  --vd-code-type: #5c2699;
+  --vd-code-cm: #007400;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --vd-soft: #1b1e23;
+  --vd-bg: #1e2127;
+  --vd-text: #d6dae1;
+  --vd-strong: #f3f5f8;
+  --vd-muted: #98a0ab;
+  --vd-grid: #2a2e35;
+  --vd-blue: #3987e5;
+  --vd-blue-1: #2c5486;
+  --vd-blue-2: #233349;
+  --vd-cyan: #27abc0;
+  --vd-cyan-1: #236674;
+  --vd-cyan-2: #203a43;
+  --vd-indigo: #8589f0;
+  --vd-indigo-1: #52558c;
+  --vd-indigo-2: #31344b;
+  --vd-violet: #ad7ee8;
+  --vd-violet-1: #665088;
+  --vd-violet-2: #38324a;
+  --vd-pink: #df78b1;
+  --vd-pink-1: #7f4d6c;
+  --vd-pink-2: #413140;
+  --vd-red: #e85f4c;
+  --vd-red-1: #83403a;
+  --vd-red-2: #422c2e;
+  --vd-orange: #df873e;
+  --vd-orange-1: #7f5433;
+  --vd-orange-2: #41332b;
+  --vd-amber: #b59425;
+  --vd-amber-1: #6a5b26;
+  --vd-amber-2: #393627;
+  --vd-green: #12a37f;
+  --vd-green-1: #186253;
+  --vd-green-2: #1c3837;
+  --vd-slate: #8b98ab;
+  --vd-slate-1: #555d69;
+  --vd-slate-2: #32363f;
+  --vd-wash: .18;
+  --vd-line: #6d747f;
+  --vd-code-kw: #69a9e0;
+  --vd-code-str: #d69d85;
+  --vd-code-num: #b8d7a3;
+  --vd-code-fn: #dcdcaa;
+  --vd-code-type: #4ec9b0;
+  --vd-code-cm: #6ab45c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+  --vd-soft: #1b1e23;
+  --vd-bg: #1e2127;
+  --vd-text: #d6dae1;
+  --vd-strong: #f3f5f8;
+  --vd-muted: #98a0ab;
+  --vd-grid: #2a2e35;
+  --vd-blue: #3987e5;
+  --vd-blue-1: #2c5486;
+  --vd-blue-2: #233349;
+  --vd-cyan: #27abc0;
+  --vd-cyan-1: #236674;
+  --vd-cyan-2: #203a43;
+  --vd-indigo: #8589f0;
+  --vd-indigo-1: #52558c;
+  --vd-indigo-2: #31344b;
+  --vd-violet: #ad7ee8;
+  --vd-violet-1: #665088;
+  --vd-violet-2: #38324a;
+  --vd-pink: #df78b1;
+  --vd-pink-1: #7f4d6c;
+  --vd-pink-2: #413140;
+  --vd-red: #e85f4c;
+  --vd-red-1: #83403a;
+  --vd-red-2: #422c2e;
+  --vd-orange: #df873e;
+  --vd-orange-1: #7f5433;
+  --vd-orange-2: #41332b;
+  --vd-amber: #b59425;
+  --vd-amber-1: #6a5b26;
+  --vd-amber-2: #393627;
+  --vd-green: #12a37f;
+  --vd-green-1: #186253;
+  --vd-green-2: #1c3837;
+  --vd-slate: #8b98ab;
+  --vd-slate-1: #555d69;
+  --vd-slate-2: #32363f;
+  --vd-wash: .18;
+  --vd-line: #6d747f;
+  --vd-code-kw: #69a9e0;
+  --vd-code-str: #d69d85;
+  --vd-code-num: #b8d7a3;
+  --vd-code-fn: #dcdcaa;
+  --vd-code-type: #4ec9b0;
+  --vd-code-cm: #6ab45c;
+  }
+}
+
+.vd { margin: 0; width: 100%; color: var(--vd-text); font: 14px/1.5 var(--vd-sans); }
+.vd *, .vd *::before, .vd *::after { box-sizing: border-box; }
+.vd-card { background: var(--vd-bg); border: 1px solid var(--vd-grid); border-radius: 16px; overflow: hidden; }
+.vd-header { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--vd-grid); }
+.vd-title { color: var(--vd-strong); font-size: 14px; font-weight: 650; }
+.vd-controls, .vd-speeds { display: flex; align-items: center; gap: 4px; flex-wrap: nowrap; }
+.vd-controls { margin-left: auto; }
+.vd-speeds { margin-right: 8px; }
+.vd button { appearance: none; border: 1px solid var(--vd-grid); border-radius: 6px; background: var(--vd-bg); color: var(--vd-text); font: 11px var(--vd-mono); min-width: 34px; height: 29px; padding: 0 6px; cursor: pointer; }
+.vd button:hover { background: var(--vd-soft); }
+.vd button[aria-pressed="true"] { border-color: var(--vd-blue); background: var(--vd-blue-2); color: var(--vd-strong); font-weight: 700; }
+.vd .vd-button { font-family: var(--vd-sans); font-size: 15px; width: 32px; }
+.vd :focus-visible { outline: 2px solid var(--vd-blue); outline-offset: 3px; }
+.vd-stage { padding: 0 20px; }
+.vd-canvas { display: block; width: 100%; }
+.vd-note { margin: 0; padding: 0 20px; min-height: 42px; display: flex; align-items: center; font-size: 12px; color: var(--vd-text); }
+.vd-timeline { display: flex; align-items: center; gap: 14px; padding: 12px 20px 18px; }
+.vd-range { appearance: none; -webkit-appearance: none; width: 100%; min-width: 0; height: 4px; margin: 10px 0; border-radius: 8px; cursor: pointer; background: linear-gradient(to right, var(--vd-blue) 0 var(--progress, 0%), var(--vd-grid) var(--progress, 0%) 100%); }
+.vd-range::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 12px; height: 12px; border: 2px solid var(--vd-bg); border-radius: 50%; background: var(--vd-blue); }
+.vd-range::-moz-range-thumb { width: 10px; height: 10px; border: 2px solid var(--vd-bg); border-radius: 50%; background: var(--vd-blue); }
+.vd-clock { font: 10px var(--vd-mono); color: var(--vd-muted); white-space: nowrap; }
+.vd-caption { margin: 12px 4px 0; color: var(--vd-muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 540px) {
+  .vd-header { gap: 12px; padding: 16px; }
+  .vd-title { width: 100%; }
+  .vd-controls { margin-left: 0; }
+  .vd-stage { padding: 0 16px; }
+  .vd-note { padding: 0 16px; min-height: 52px; }
+  .vd-timeline { padding: 10px 16px 16px; }
+}

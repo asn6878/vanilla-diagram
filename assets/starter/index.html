@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vanilla Diagram</title>
+<link rel="stylesheet" href="./diagram.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--vd-soft); color: var(--vd-text); font-family: var(--vd-sans); }
+  main { max-width: 860px; margin: 32px auto; }
+</style>
+<main><div id="diagram"></div></main>
+<script type="module">
+  import { mount } from './diagram.js';
+  import scene from './scene.js';
+  mount('#diagram', scene);
+</script>
+</html>

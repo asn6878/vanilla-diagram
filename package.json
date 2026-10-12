@@ -1,0 +1,29 @@
+{
+  "name": "vanilla-diagram",
+  "version": "0.0.1",
+  "private": true,
+  "description": "An agent skill for clear animated infographics in vanilla JavaScript.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "capture": "node scripts/record-demos.mjs",
+    "test": "node --test test/*.test.mjs",
+    "install:codex": "node scripts/install.mjs --agent codex",
+    "install:claude": "node scripts/install.mjs --agent claude"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asn6878/vanilla-diagram.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asn6878/vanilla-diagram/issues"
+  },
+  "homepage": "https://github.com/asn6878/vanilla-diagram#readme"
+}
