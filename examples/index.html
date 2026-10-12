@@ -21,8 +21,11 @@
     body.recording header { display: none; }
     body.recording .grid { display: block; }
     body.recording .record-label { display: block; }
-    .cursor { position: fixed; z-index: 20; top: 0; left: 0; width: 12px; height: 12px; border: 2px solid var(--vd-bg); border-radius: 50%; background: var(--vd-strong); pointer-events: none; transform: translate(-50%, -50%); display: none; }
-    .cursor.down { width: 22px; height: 22px; opacity: .65; }
+    .cursor { position: fixed; z-index: 20; top: 0; left: 0; width: 26px; height: 32px; pointer-events: none; transform: translate(-3px, -2px); display: none; }
+    .cursor svg { position: relative; display: block; width: 100%; height: 100%; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 22%)); transform-origin: 3px 2px; transition: transform 80ms ease; }
+    .cursor::before { content: ''; position: absolute; left: 3px; top: 2px; width: 28px; height: 28px; border: 2px solid #6886ed; border-radius: 50%; background: rgb(104 134 237 / 8%); transform: translate(-50%, -50%); opacity: 0; transition: opacity 80ms ease; }
+    .cursor.down::before { opacity: 1; }
+    .cursor.down svg { transform: scale(.94); }
     @media(max-width: 940px) { .grid { grid-template-columns: 1fr; } }
     @media(max-width: 540px) { body { padding: 24px 16px; } header { align-items: flex-start; } header p { max-width: 240px; } }
   </style>
@@ -33,7 +36,11 @@
     <p class="record-label" id="record-label">Vanilla Infographics</p>
     <div class="grid"><div id="parcel"></div><div id="growth"></div></div>
   </main>
-  <div class="cursor" id="cursor"></div>
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <svg viewBox="0 0 26 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 2v21l5.7-5.1 4.3 10 4.6-2-4.5-10.1H22L3 2Z" fill="#20242c" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+  </div>
   <script type="module">
     import { mount } from '../assets/starter/diagram.js';
     import parcel from './scenes/parcel-route.js';
@@ -64,6 +71,7 @@
       });
       document.addEventListener('pointerdown', () => cursor.classList.add('down'));
       document.addEventListener('pointerup', () => cursor.classList.remove('down'));
+      document.addEventListener('pointercancel', () => cursor.classList.remove('down'));
     }
   </script>
 </body>

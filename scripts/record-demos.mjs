@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const recordings = resolve(root, '.recordings');
 const media = resolve(root, 'docs/media');
+const controlsOnly = process.argv.includes('--controls-only');
 await mkdir(recordings, { recursive: true });
 await mkdir(media, { recursive: true });
 execFileSync('ffmpeg', ['-version'], { stdio: 'ignore' });
@@ -42,7 +43,30 @@ async function record(scene, controls = false) {
   await page.waitForFunction(() => Object.values(window.demoPlayers).every(player => player.f.w > 0 && player.visible));
   await page.screenshot({ path: resolve(recordings, `${scene}-initial.png`) });
   const label = text => page.locator('#record-label').evaluate((element, value) => { element.textContent = value; }, text);
+  let pointer = { x: 584, y: 182 };
+  const moveTo = async (x, y, duration = 450) => {
+    const from = pointer;
+    const steps = Math.max(1, Math.round(duration / 16));
+    for (let step = 1; step <= steps; step++) {
+      const progress = step / steps;
+      const eased = progress * progress * (3 - 2 * progress);
+      await page.mouse.move(from.x + (x - from.x) * eased, from.y + (y - from.y) * eased);
+      await sleep(duration / steps);
+    }
+    pointer = { x, y };
+  };
+  const clickControl = async name => {
+    const box = await page.getByRole('button', { name, exact: true }).boundingBox();
+    if (!box) throw new Error(`Control is not visible: ${name}`);
+    await moveTo(box.x + box.width / 2, box.y + box.height / 2);
+    await sleep(100);
+    await page.mouse.down();
+    await sleep(150);
+    await page.mouse.up();
+    await sleep(150);
+  };
   await label(controls ? 'Play at 1×' : scene === 'parcel' ? 'PROCESS · A PARCEL ROUTE' : 'COMPARISON · COMPUTED GROWTH');
+  if (controls) await page.mouse.move(pointer.x, pointer.y);
   await sleep(350);
   const frames = resolve(recordings, `${scene}-${controls ? 'controls' : 'scene'}-frames`);
   await rm(frames, { recursive: true, force: true });
@@ -58,61 +82,67 @@ async function record(scene, controls = false) {
       await sleep(Math.max(0, start + frame * 1000 / 15 - Date.now()));
     }
   })();
-  await page.getByRole('button', { name: 'Play', exact: true }).click();
-  if (controls) {
-    await sleep(1500);
-    await label('Speed up · 2×');
-    await page.getByRole('button', { name: '2× speed', exact: true }).click();
-    await sleep(1500);
-    await label('Pause and inspect');
-    await page.getByRole('button', { name: 'Pause', exact: true }).click();
-    await sleep(650);
-    const drag = async fraction => {
-      const slider = page.getByRole('slider', { name: 'Playback position' });
-      const box = await slider.boundingBox();
-      const current = await slider.evaluate(node => Number(node.value) / Number(node.max));
-      const x = value => box.x + 6 + value * (box.width - 12);
-      await page.mouse.move(x(current), box.y + box.height / 2);
-      await page.mouse.down();
-      for (let i = 1; i <= 24; i++) {
-        await page.mouse.move(x(current + (fraction - current) * i / 24), box.y + box.height / 2);
-        await sleep(30);
-      }
-      await page.mouse.up();
-    };
-    await label('Scrub forward');
-    await drag(0.88);
-    await sleep(600);
-    await label('Scrub backward');
-    await drag(0.2);
-    await sleep(600);
-    await label('Resume · 0.5×');
-    await page.getByRole('button', { name: '0.5× speed', exact: true }).click();
-    await page.getByRole('button', { name: 'Play', exact: true }).click();
-    await sleep(1500);
-    await label('Reverse playback');
-    await page.getByRole('button', { name: 'Reverse playback', exact: true }).click();
-    const before = await page.evaluate(() => window.demoPlayers.parcel.time);
-    await sleep(1400);
-    const after = await page.evaluate(() => window.demoPlayers.parcel.time);
-    if (after >= before) throw new Error('Reverse playback did not move backward.');
-    await label('Reverse · 1.5×');
-    await page.getByRole('button', { name: '1.5× speed', exact: true }).click();
-    await sleep(1200);
-    await label('Jump to the conclusion');
-    await drag(1);
-    await sleep(1500);
-    const state = await page.evaluate(() => ({ time: window.demoPlayers.parcel.time, paused: window.demoPlayers.parcel.paused, rate: window.demoPlayers.parcel.rate }));
-    if (!state.paused || state.time < 11.9 || state.rate !== 1.5) throw new Error('The timeline did not preserve playback state.');
-  } else {
-    await sleep(11600);
-    await page.getByRole('button', { name: 'Pause', exact: true }).click();
-    await sleep(300);
+  try {
+    if (controls) await clickControl('Play');
+    else await page.getByRole('button', { name: 'Play', exact: true }).click();
+    if (controls) {
+      await sleep(1500);
+      await label('Speed up · 2×');
+      await clickControl('2× speed');
+      await sleep(1500);
+      await label('Pause and inspect');
+      await clickControl('Pause');
+      await sleep(650);
+      const drag = async fraction => {
+        const slider = page.getByRole('slider', { name: 'Playback position' });
+        const box = await slider.boundingBox();
+        if (!box) throw new Error('The playback timeline is not visible.');
+        const current = await slider.evaluate(node => Number(node.value) / Number(node.max));
+        const x = value => box.x + 6 + value * (box.width - 12);
+        await moveTo(x(current), box.y + box.height / 2, 500);
+        await sleep(150);
+        await page.mouse.down();
+        await sleep(150);
+        await moveTo(x(fraction), box.y + box.height / 2, 1100);
+        await sleep(150);
+        await page.mouse.up();
+      };
+      await label('Scrub forward');
+      await drag(0.88);
+      await sleep(600);
+      await label('Scrub backward');
+      await drag(0.2);
+      await sleep(600);
+      await label('Resume · 0.5×');
+      await clickControl('0.5× speed');
+      await clickControl('Play');
+      await sleep(1500);
+      await label('Reverse playback');
+      await clickControl('Reverse playback');
+      const before = await page.evaluate(() => window.demoPlayers.parcel.time);
+      await sleep(1400);
+      const after = await page.evaluate(() => window.demoPlayers.parcel.time);
+      if (after >= before) throw new Error('Reverse playback did not move backward.');
+      await label('Reverse · 1.5×');
+      await clickControl('1.5× speed');
+      await sleep(900);
+      await label('Jump to the conclusion');
+      await drag(1);
+      await moveTo(609, 497, 350);
+      await sleep(1500);
+      const state = await page.evaluate(() => ({ time: window.demoPlayers.parcel.time, paused: window.demoPlayers.parcel.paused, rate: window.demoPlayers.parcel.rate }));
+      if (!state.paused || state.time < 11.9 || state.rate !== 1.5) throw new Error('The timeline did not preserve playback state.');
+    } else {
+      await sleep(11600);
+      await page.getByRole('button', { name: 'Pause', exact: true }).click();
+      await sleep(300);
+    }
+    await page.screenshot({ path: resolve(recordings, `${scene}-${controls ? 'controls' : 'final'}.png`) });
+  } finally {
+    capturing = false;
+    await capture;
+    await context.close();
   }
-  await page.screenshot({ path: resolve(recordings, `${scene}-${controls ? 'controls' : 'final'}.png`) });
-  capturing = false;
-  await capture;
-  await context.close();
   if (errors.length) throw new Error(errors.join('\n'));
   const output = resolve(media, controls ? 'controls.gif' : scene === 'parcel' ? 'parcel-route.gif' : 'growth-curves.gif');
   encode(frames, output);
@@ -120,11 +150,13 @@ async function record(scene, controls = false) {
 }
 
 try {
-  await record('parcel');
-  await record('growth');
-  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', resolve(media, 'parcel-route.gif'), '-i', resolve(media, 'growth-curves.gif'),
-    '-filter_complex', '[0:v][1:v]hstack=inputs=2:shortest=1,fps=15,split[a][b];[a]palettegen=stats_mode=full[p];[b][p]paletteuse=dither=none',
-    '-loop', '0', resolve(media, 'examples.gif')], { stdio: 'inherit' });
+  if (!controlsOnly) {
+    await record('parcel');
+    await record('growth');
+    execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', resolve(media, 'parcel-route.gif'), '-i', resolve(media, 'growth-curves.gif'),
+      '-filter_complex', '[0:v][1:v]hstack=inputs=2:shortest=1,fps=15,split[a][b];[a]palettegen=stats_mode=full[p];[b][p]paletteuse=dither=none',
+      '-loop', '0', resolve(media, 'examples.gif')], { stdio: 'inherit' });
+  }
   await record('parcel', true);
 } finally {
   await browser.close();

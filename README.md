@@ -20,7 +20,7 @@ Individual clips: [parcel route](docs/media/parcel-route.gif) · [growth curves]
 
 Change speed, pause on a detail, drag forward and backward, or play the explanation in reverse.
 
-<p align="center"><img src="docs/media/controls.gif" width="680" alt="Actual player interaction: speed changes, pause, timeline scrubbing, and reverse playback"></p>
+<p align="center"><img src="docs/media/controls.gif" width="680" alt="A mouse cursor changes speed, pauses, drags the timeline forward and backward, and starts reverse playback"></p>
 
 ## Get started
 
@@ -65,6 +65,7 @@ The output is ordinary HTML, CSS, and ES modules. Edit `scene.js`; the shared pl
 Vanilla JavaScript · HTML · CSS · Canvas 2D. Node.js runs the local tools. Playwright and FFmpeg are used only to record the README GIFs.
 
 To regenerate the recordings: `npm install`, `npx playwright install chromium`, install FFmpeg, then `npm run capture`.
+To record only the controls demo, use `npm run capture -- --controls-only`.
 
 ## License
 

@@ -20,7 +20,7 @@
 
 배속을 바꾸고, 멈춘 뒤 재생 위치를 앞뒤로 옮기거나 역재생할 수 있습니다.
 
-<p align="center"><img src="media/controls.gif" width="680" alt="실제 배속 변경, 일시정지, 재생 위치 이동, 역재생 조작"></p>
+<p align="center"><img src="media/controls.gif" width="680" alt="마우스 커서로 배속 변경, 일시정지, 타임라인 앞뒤 드래그, 역재생을 조작하는 모습"></p>
 
 ## 시작하기
 
@@ -65,6 +65,7 @@ npm run dev
 바닐라 JavaScript · HTML · CSS · Canvas 2D. 로컬 도구는 Node.js로 실행합니다. Playwright와 FFmpeg는 README의 GIF를 녹화할 때만 사용합니다.
 
 GIF를 다시 만들려면 `npm install`, `npx playwright install chromium`을 실행하고 FFmpeg를 설치한 뒤 `npm run capture`를 실행합니다.
+재생 조작 GIF만 녹화하려면 `npm run capture -- --controls-only`를 실행합니다.
 
 ## 라이선스
 
