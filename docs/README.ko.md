@@ -3,7 +3,7 @@
 </p>
 <p align="center">바닐라 JavaScript로 움직이는 인포그래픽을 만드는 에이전트 스킬</p>
 <p align="center">Codex · Claude Code · Canvas 2D · 런타임 의존성 없음</p>
-<p align="center"><a href="https://github.com/asn6878/vanilla-diagram/releases/tag/v0.0.1"><img src="https://img.shields.io/badge/release-0.0.1-79573D" alt="Release 0.0.1"></a> <a href="../LICENSE"><img src="https://img.shields.io/badge/license-MIT-687E69" alt="MIT license"></a></p>
+<p align="center"><a href="https://github.com/asn6878/vanilla-infographics/releases/tag/v0.0.1"><img src="https://img.shields.io/badge/release-0.0.1-79573D" alt="Release 0.0.1"></a> <a href="../LICENSE"><img src="https://img.shields.io/badge/license-MIT-687E69" alt="MIT license"></a></p>
 <p align="center"><a href="#시작하기">시작하기</a> · <a href="../SKILL.md">스킬 문서</a> · <a href="../README.md">English</a></p>
 
 과정, 비교, 시간에 따른 변화를 설명하면 에이전트가 수정 가능한 인포그래픽을 만듭니다. 배속 조절, 일시정지, 역재생, 재생 위치 이동으로 원하는 순간을 살펴볼 수 있습니다.
@@ -31,8 +31,8 @@
 레포를 복제한 뒤 사용할 에이전트의 스킬을 설치합니다. 도우미 스크립트에는 Node.js 22 이상이 필요합니다.
 
 ```bash
-git clone https://github.com/asn6878/vanilla-diagram.git
-cd vanilla-diagram
+git clone https://github.com/asn6878/vanilla-infographics.git
+cd vanilla-infographics
 
 # 하나를 고르거나 --agent all로 둘 다 설치합니다.
 node scripts/install.mjs --agent codex
@@ -54,15 +54,15 @@ node scripts/install.mjs --agent claude
 [Skills CLI](https://github.com/vercel-labs/skills)로도 설치할 수 있습니다.
 
 ```bash
-npx skills add asn6878/vanilla-diagram --skill vanilla-diagram --agent codex --global
-npx skills add asn6878/vanilla-diagram --skill vanilla-diagram --agent claude-code --global
+npx skills add asn6878/vanilla-infographics --skill vanilla-diagram --agent codex --global
+npx skills add asn6878/vanilla-infographics --skill vanilla-diagram --agent claude-code --global
 ```
 
 현재 프로젝트에 설치하려면 `--global`을 빼면 됩니다. 이 방식은 스킬 외에 저장소의 문서와 예제도 함께 복사합니다.
 
 </details>
 
-파일로 설치하려면 [0.0.1 스킬 ZIP](https://github.com/asn6878/vanilla-diagram/releases/download/v0.0.1/vanilla-diagram-skill-v0.0.1.zip)을 내려받아 `vanilla-diagram` 폴더를 에이전트의 스킬 경로에 풀면 됩니다.
+파일로 설치하려면 [0.0.1 스킬 ZIP](https://github.com/asn6878/vanilla-infographics/releases/download/v0.0.1/vanilla-diagram-skill-v0.0.1.zip)을 내려받아 `vanilla-diagram` 폴더를 에이전트의 스킬 경로에 풀면 됩니다.
 
 요청 예시:
 

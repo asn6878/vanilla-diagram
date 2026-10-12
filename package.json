@@ -1,5 +1,5 @@
 {
-  "name": "vanilla-diagram",
+  "name": "vanilla-infographics",
   "version": "0.0.1",
   "private": true,
   "description": "An agent skill for clear animated infographics in vanilla JavaScript.",
@@ -20,10 +20,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asn6878/vanilla-diagram.git"
+    "url": "git+https://github.com/asn6878/vanilla-infographics.git"
   },
   "bugs": {
-    "url": "https://github.com/asn6878/vanilla-diagram/issues"
+    "url": "https://github.com/asn6878/vanilla-infographics/issues"
   },
-  "homepage": "https://github.com/asn6878/vanilla-diagram#readme"
+  "homepage": "https://github.com/asn6878/vanilla-infographics#readme"
 }

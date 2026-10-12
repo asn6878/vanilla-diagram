@@ -3,7 +3,7 @@
 </p>
 <p align="center">An agent skill for clear, animated infographics in plain JavaScript.</p>
 <p align="center">Codex · Claude Code · Canvas 2D · Zero runtime dependencies</p>
-<p align="center"><a href="https://github.com/asn6878/vanilla-diagram/releases/tag/v0.0.1"><img src="https://img.shields.io/badge/release-0.0.1-79573D" alt="Release 0.0.1"></a> <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-687E69" alt="MIT license"></a></p>
+<p align="center"><a href="https://github.com/asn6878/vanilla-infographics/releases/tag/v0.0.1"><img src="https://img.shields.io/badge/release-0.0.1-79573D" alt="Release 0.0.1"></a> <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-687E69" alt="MIT license"></a></p>
 <p align="center"><a href="#get-started">Get started</a> · <a href="SKILL.md">The skill</a> · <a href="docs/README.ko.md">한국어</a></p>
 
 Describe a process, a comparison, or an idea that changes over time. Your agent builds a small, editable infographic with speed controls, pause, reverse playback, and a timeline you can scrub.
@@ -31,8 +31,8 @@ Change speed, pause on a detail, drag forward and backward, or play the explanat
 Clone the repository and install the skill for your agent. Node.js 22+ is used by the helper scripts.
 
 ```bash
-git clone https://github.com/asn6878/vanilla-diagram.git
-cd vanilla-diagram
+git clone https://github.com/asn6878/vanilla-infographics.git
+cd vanilla-infographics
 
 # Pick one, or use --agent all.
 node scripts/install.mjs --agent codex
@@ -54,15 +54,15 @@ The agent links above lead to official documentation. Run the commands to instal
 The [Skills CLI](https://github.com/vercel-labs/skills) also supports this repository:
 
 ```bash
-npx skills add asn6878/vanilla-diagram --skill vanilla-diagram --agent codex --global
-npx skills add asn6878/vanilla-diagram --skill vanilla-diagram --agent claude-code --global
+npx skills add asn6878/vanilla-infographics --skill vanilla-diagram --agent codex --global
+npx skills add asn6878/vanilla-infographics --skill vanilla-diagram --agent claude-code --global
 ```
 
 Omit `--global` to install into your current project. This route copies the repository documentation and demos along with the skill.
 
 </details>
 
-Prefer a download? Get the [0.0.1 skill ZIP](https://github.com/asn6878/vanilla-diagram/releases/download/v0.0.1/vanilla-diagram-skill-v0.0.1.zip) and extract its `vanilla-diagram` folder into your agent’s skills directory.
+Prefer a download? Get the [0.0.1 skill ZIP](https://github.com/asn6878/vanilla-infographics/releases/download/v0.0.1/vanilla-diagram-skill-v0.0.1.zip) and extract its `vanilla-diagram` folder into your agent’s skills directory.
 
 Try a prompt:
 

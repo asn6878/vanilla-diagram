@@ -24,7 +24,7 @@ const server = http.createServer(async (request, response) => {
 });
 server.listen(port, '127.0.0.1', () => {
   const address = server.address();
-  console.log(`Vanilla Diagram: http://localhost:${address.port}${directory ? '/' : '/examples/'}`);
+  console.log(`Vanilla Infographics: http://localhost:${address.port}${directory ? '/' : '/examples/'}`);
 });
 server.on('error', error => { console.error(error.message); process.exitCode = 1; });
 for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, () => server.close());

@@ -1,4 +1,4 @@
-// Drawing and timing helpers for Vanilla Diagram.
+// Drawing and timing helpers for Vanilla Infographics.
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
 
   // a polyline's point at fraction p of its length, with the index and angle of that segment
