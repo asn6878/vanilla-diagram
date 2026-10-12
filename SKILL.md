@@ -10,6 +10,7 @@ Turn the user's explanation into an infographic that can be played, paused, and 
 ## Build the explanation
 
 - Identify what the viewer should understand. Choose a flow, sequence, comparison, chart, or another arrangement that fits the content. Preserve the user's requested language, style, and output location.
+- Treat the examples and starter styling as starting points. Follow the user's requested composition, shapes, typography, colors, and motion; revise them through follow-up requests. Adapt the surrounding HTML and CSS when needed while preserving usable playback controls.
 - Sketch the meaningful states and transitions before drawing. A short caption states the outcome; each phase has a short note that also makes sense while paused.
 - Use supplied data or a stated, reproducible calculation. Label illustrative data as illustrative. Never present invented measurements as real observations.
 - Read [references/design.md](references/design.md) for layout, color, motion, and accessibility choices. Read [references/api.md](references/api.md) while implementing a scene.

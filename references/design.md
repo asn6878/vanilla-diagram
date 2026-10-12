@@ -10,7 +10,11 @@ The card has a title, controls, stage, phase note, and timeline. The caption fol
 
 ## Color system
 
-The shared stylesheet supplies ten identity colors in both themes. Each has three steps:
+The shared stylesheet supplies ten identity colors in both themes.
+
+These are defaults. When the user requests another palette, update the shared tokens and their theme variants while keeping labels legible and color meanings consistent.
+
+Each color has three steps:
 
 | Step | Purpose | API |
 | --- | --- | --- |
